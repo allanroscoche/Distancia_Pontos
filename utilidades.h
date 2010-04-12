@@ -15,8 +15,11 @@ class Matriz
 		~Matriz();
 
 	private:
+		// dados
 		int tam_x, tam_y;
 		char ** matriz;
+
+		// funções auxiliares
 		void aloca();
 };
 

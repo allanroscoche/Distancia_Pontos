@@ -4,6 +4,8 @@
 #include <fstream>
 #include "utilidades.h"
 
+#define BUFF_MAX	30
+
 using namespace std;
 
 Matriz::Matriz(int x, int y)
@@ -27,12 +29,46 @@ Matriz::Matriz(char * nome_arquivo)
 {
 	int i,j;
 	int x,y;
+	char ch, buffer[BUFF_MAX];
 
 	ifstream arq;
 	arq.open(nome_arquivo);
 
-	
-//	cout << "x:" << x << " y:" << endl;
+	// lê x
+	i=0;
+	do{
+		arq.get(ch);
+		buffer[i++]=ch;
+	}while((ch != ' ') && (i<BUFF_MAX));
+	x = atoi(buffer);
+
+	// lê y
+	i=0;
+	do{
+		arq.get(ch);
+		buffer[i++]=ch;
+	}while((ch != '\n') && (i<BUFF_MAX));
+	y = atoi(buffer);
+
+	cout << "x:" << x << " y:" << y << endl;
+	tam_x = x;
+	tam_y = y;
+	this->aloca();
+
+	for(i=0;i<tam_x;i++)
+	{
+		for(j=0;j<tam_y;j++)
+		{
+			// carrega o valor
+			arq.get(ch);
+			if(ch=='0')
+				matriz[i][j]='0';
+			else
+				matriz[i][j]='1';
+			// espaco ou fim de linha
+			arq.get(ch);
+		}
+	}
 
 	arq.close();
 	

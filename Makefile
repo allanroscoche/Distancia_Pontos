@@ -13,4 +13,4 @@ utilidades.o: utilidades.cpp
 	g++ -c -o utilidades.o utilidades.cpp
 
 clean:
-	rm paralelo sequencial *.o
+	rm paralelo sequencial *.o *~

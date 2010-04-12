@@ -8,12 +8,8 @@ int main(int argc, char ** argv)
 	//list<int> L;
 
 	Matriz m(argv[1]);
-	//m.imprime();
+	m.imprime();
 
-	//if(!abre_matriz(argv[1], &x, &y))
-	//	return ARQUIVO_MUITO_GRANDE;
-
-	
 
 	return 0;
 
