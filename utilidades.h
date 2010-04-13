@@ -4,12 +4,14 @@
 #define MAX_TAM_X				100
 #define MAX_TAM_Y				100
 
+#include <list>
 
 class Matriz
 {
 	public:
 		void imprime();
-		int abre_arq(char * nome);
+		int getPontos(std::list<int>&);
+
 		Matriz(int x, int y);
 		Matriz(char * nome_arq);
 		~Matriz();
@@ -22,6 +24,3 @@ class Matriz
 		// funções auxiliares
 		void aloca();
 };
-
-void imprime_matriz(int, int);
-int abre_matriz(char * arquivo, int *, int *);
