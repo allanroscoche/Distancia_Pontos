@@ -1,9 +1,6 @@
 #include "utilidades.h"
 //#include "stdlib.h"
-#include <list>
 #include <iostream>
-#include <algorithm> // copy algorithm
-#include <iterator>  // ostream_iterator
 
 using namespace std;
 
