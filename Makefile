@@ -1,10 +1,13 @@
-all: paralelo sequencial
+all: paralelo sequencial cria_tabela
 
 trabalho: paralelo.cpp
 	g++ -Lphtreads -o paralelo paralelo.cpp
 
 sequencial: sequencial.o utilidades.o
 	g++ -o sequencial sequencial.o utilidades.o
+
+cria_tabela: cria_tabela.cpp
+	g++ -o cria_tabela cria_tabela.cpp
 
 sequencial.o: sequencial.cpp
 	g++ -c -o sequencial.o sequencial.cpp

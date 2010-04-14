@@ -9,35 +9,30 @@ using namespace std;
 
 int main(int argc, char ** argv)
 {
-	vector<Ponto> L;
+	P *p;
+	int numPontos;
 
-	Matriz m(argv[1]);
-	m.imprime();
+	// cria a matriz através da entrada padrão
+	Matriz m;
 
-	cout << "Num Pontos:" << m.getPontos(L) << endl;
+	// recebe o número de pontos
+	numPontos = m.numPontos();
+	cout << "Num Pontos:" << numPontos << endl;
+	// aloca o vetor de pontos
+	p = (P *)calloc(numPontos,sizeof(P));
+	if(p==NULL) return 0;
+	// copia os pontos
+	m.getPontos(p);
 
+	// Efetua o processamento
 	int i,j;
-
-	for(i=0;i< (L.size()) ;i++)
+	for(i=0;i<(numPontos-1);i++)
 	{
-		cout << "P[" << i+1 << "]= " << L[i];
-		for(j=i+1;j<L.size();j++)
-			cout << "p[" << i+1 << "][" << j+1 << "]:" << L[i].distancia(L[j]) << ", ";
-		cout << endl << endl;
+		for(j=i+1;j<numPontos;j++)
+			distancia(p[i],p[j]);
 	}
 
-/*
-	vector<Ponto>::iterator i,j;
-
-	for(i=L.begin(); i != L.end(); ++i)
-	{
-		cout << *i;
-		for(j=L.begin(); j!= L.end(); j++)
-			cout << "d:" << i->distancia(*j) << "  ";
-		cout << endl;
-	}
-*/
-
+	cout << "Finalizado" << endl;
 	return 0;
 
 }

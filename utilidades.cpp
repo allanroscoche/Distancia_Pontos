@@ -11,6 +11,12 @@
 
 using namespace std;
 
+double distancia(P p1, P p2)
+{
+	return abs( (p2.x - p1.x) + (p2.y - p1.y));
+}
+
+
 Ponto::Ponto(int i, int j)
 {
 	x=i;
@@ -31,6 +37,27 @@ Matriz::Matriz(int x, int y)
 {
 	tam_x = x;
 	tam_y = y;
+
+}
+Matriz::Matriz()
+{
+	cin >> tam_x >> tam_y;
+	cout << "x:" << tam_x << " y:" << tam_y << endl;
+
+	int i, j;
+	char ch;
+
+	for(i=0;i<tam_x;i++)
+	{
+		for(j=0;j<tam_y;j++)
+		{
+			cin >> ch;
+			if(ch == '1'){
+				Ponto p(i,j);
+				L.push_back(p);
+			}
+		}
+	}
 
 }
 Matriz::Matriz(char * nome_arquivo)
@@ -120,4 +147,23 @@ int Matriz::getPontos(std::vector<Ponto>& lista)
 	lista = L;
 	return L.size();
 }
+
+int Matriz::numPontos()
+{
+	return L.size();
+}
+
+int Matriz::getPontos(P * ponto)
+{
+	
+	int i;
+	for(i=0;i<L.size();i++){
+		ponto[i].x = L[i].x;
+		ponto[i].y = L[i].y;
+	}
+
+	return L.size();
+}
+
+
 

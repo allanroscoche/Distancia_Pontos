@@ -9,6 +9,14 @@
 
 using namespace std;
 
+struct P
+{
+	int x;
+	int y;
+};
+
+double distancia(P, P);
+
 class Ponto
 {
 	friend ostream &operator<<(ostream &, const Ponto &);
@@ -28,9 +36,12 @@ class Matriz
 	public:
 		void imprime();
 		int getPontos(vector<Ponto>&);
+		int getPontos(P *);
+		int numPontos();
 
 		Matriz(int x, int y);
 		Matriz(char * nome_arq);
+		Matriz();
 		~Matriz();
 
 	private:
