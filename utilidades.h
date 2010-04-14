@@ -4,13 +4,30 @@
 #define MAX_TAM_X				100
 #define MAX_TAM_Y				100
 
-#include <list>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+class Ponto
+{
+	friend ostream &operator<<(ostream &, const Ponto &);
+
+	public:
+		Ponto(int x, int y);
+		double distancia(Ponto p);
+
+	//protected:
+		int x;
+		int y;
+		
+};
 
 class Matriz
 {
 	public:
 		void imprime();
-		int getPontos(std::list<int>&);
+		int getPontos(vector<Ponto>&);
 
 		Matriz(int x, int y);
 		Matriz(char * nome_arq);
@@ -19,8 +36,6 @@ class Matriz
 	private:
 		// dados
 		int tam_x, tam_y;
-		char ** matriz;
+		vector<Ponto> L;
 
-		// funções auxiliares
-		void aloca();
 };

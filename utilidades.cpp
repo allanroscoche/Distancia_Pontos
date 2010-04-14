@@ -1,19 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
 #include <iostream>
 #include <fstream>
+
 #include "utilidades.h"
 
 #define BUFF_MAX	30
 
 using namespace std;
 
+Ponto::Ponto(int i, int j)
+{
+	x=i;
+	y=j;
+}
+ostream &operator<<(ostream &output, const Ponto &p)
+{
+   output << "x:" << p.x << " y:" << p.y <<  endl;
+   return output;
+}
+
+double Ponto::distancia(Ponto p)
+{
+	return abs( (p.x - x) + (p.y - y));
+}
+
 Matriz::Matriz(int x, int y)
 {
 	tam_x = x;
 	tam_y = y;
-
-	this->aloca();
 
 }
 Matriz::Matriz(char * nome_arquivo)
@@ -44,7 +61,7 @@ Matriz::Matriz(char * nome_arquivo)
 	cout << "x:" << x << " y:" << y << endl;
 	tam_x = x;
 	tam_y = y;
-	this->aloca();
+	
 
 	for(i=0;i<tam_x;i++)
 	{
@@ -52,10 +69,12 @@ Matriz::Matriz(char * nome_arquivo)
 		{
 			// carrega o valor
 			arq.get(ch);
-			if(ch=='0')
-				matriz[i][j]='0';
-			else
-				matriz[i][j]='1';
+			// Adiciona o ponto a lista
+			if(ch == '1'){
+				Ponto p(i,j);
+				L.push_back(p);
+			}
+		
 			// espaco ou fim de linha
 			arq.get(ch);
 		}
@@ -66,40 +85,39 @@ Matriz::Matriz(char * nome_arquivo)
 }
 Matriz::~Matriz(void)
 {
-	int i;
-	for(i=0;i<tam_x;i++)
-		free(matriz[i]);
+
 }
 
-void Matriz::aloca()
-{
-	int i;
 
-	matriz = (char**)malloc(tam_x * sizeof(int));
-	for(i=0;i<tam_x;i++)
-		matriz[i] = (char*)malloc(tam_y * sizeof(char));
-	
-}
 
 void Matriz::imprime()
 {
 	int i,j;
+	char matriz[tam_x][tam_y];
+
+	for(i=0;i<tam_x;i++)
+		for(j=0;j<tam_y;j++)
+			matriz[i][j]='0';
+
+	vector<Ponto>::iterator ii;
+
+	for(ii=L.begin(); ii != L.end(); ++ii)
+	{
+		matriz[ii->x][ii->y]='1';
+	}
+
 	for(i=0;i<tam_x;i++)
 	{
 		for(j=0;j<tam_y;j++)
 			cout << matriz[i][j] << " ";
 		cout << endl;
 	}
+
 }
 
-int Matriz::getPontos(std::list<int>& lista)
+int Matriz::getPontos(std::vector<Ponto>& lista)
 {
-	int i, j;
-	for(i=0;i<tam_x;i++)
-		for(j=0;j<tam_y;j++)
-			if(matriz[i][j]=='1')
-			{
-				//lista.pushfront(1);
-			}
+	lista = L;
+	return L.size();
 }
 
