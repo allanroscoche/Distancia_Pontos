@@ -1,19 +1,35 @@
+FLAGS=-O2 -Wall
+
+BIN_PARALELO=paralelo
+BIN_SEQUENCIAL=sequencial
+BIN_TABELA=cria_tabela
+
+SCR_PATH=./src
+LIB_PATH=./src/lib
+
+SRC_PARALELO=${SCR_PATH}/paralelo.cpp
+SRC_SEQUENCIAL=${SCR_PATH}/sequencial.cpp
+SRC_TABELA=${LIB_PATH}/cria_tabela.cpp
+
+LIB=${LIB_PATH}/utilidades
+
+
 all: paralelo sequencial cria_tabela
 
-trabalho: paralelo.cpp
-	g++ -Lphtreads -o paralelo paralelo.cpp
+paralelo: ${SRC_PARALELO}
+	g++ ${FLAGS} -Lphtreads -o ${BIN_PARALELO} ${SRC_PARALELO}
 
-sequencial: sequencial.o utilidades.o
-	g++ -o sequencial sequencial.o utilidades.o
+${BIN_SEQUENCIAL}: ${BIN_SEQUENCIAL}.o ${LIB}.o
+	g++ ${FLAGS} -o ${BIN_SEQUENCIAL} ${BIN_SEQUENCIAL}.o ${LIB}.o
 
-cria_tabela: cria_tabela.cpp
-	g++ -o cria_tabela cria_tabela.cpp
+${BIN_TABELA}:
+	g++ ${FLAGS} -o ${BIN_TABELA} ${SRC_TABELA}
 
-sequencial.o: sequencial.cpp
-	g++ -c -o sequencial.o sequencial.cpp
+${BIN_SEQUENCIAL}.o: ${SRC_SEQUENCIAL}
+	g++ ${FLAGS} -c -o ${BIN_SEQUENCIAL}.o ${SRC_SEQUENCIAL}
 
-utilidades.o: utilidades.cpp
-	g++ -c -o utilidades.o utilidades.cpp
+${LIB}.o:
+	g++ ${FLAGS} -c -o ${LIB}.o ${LIB}.cpp
 
 clean:
-	rm paralelo sequencial cria_tabela *.o *~
+	rm -rf ${BIN_PARALELO} ${BIN_SEQUENCIAL} ${BIN_TABELA} *.o *~
