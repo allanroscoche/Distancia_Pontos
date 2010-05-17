@@ -1,52 +1,46 @@
-#define ARQUIVO_MUITO_GRANDE		-2
-#define ERRO						-1
+#define ARQUIVO_MUITO_GRANDE			-2
+#define ERRO					-1
+
+#define RED					1
+#define BLACK					0
+
+//#define NULL					0
+
+#define ALLOC_SIZE				1000
 
 #define MAX_TAM_X				100
 #define MAX_TAM_Y				100
 
-#include <vector>
-#include <iostream>
 
-using namespace std;
-
-struct P
+typedef struct Ponto
 {
 	int x;
 	int y;
-};
+	int z;
+} Ponto;
 
-double distancia(P, P);
-
-class Ponto
+typedef struct Dist
 {
-	friend ostream &operator<<(ostream &, const Ponto &);
+	double distancia;
+	unsigned int contador;
+} Dist;
 
-	public:
-		Ponto(int x, int y);
-		double distancia(Ponto p);
-
-	//protected:
-		int x;
-		int y;
-		
-};
-
-class Matriz
+typedef struct RB_nodo
 {
-	public:
-		void imprime();
-		int getPontos(vector<Ponto>&);
-		int getPontos(P *);
-		int numPontos();
+	int cor;
+	Dist valor;
+	struct RB_nodo * esquerda;
+	struct RB_nodo * direita;
+	struct RB_nodo * pai;
+} RB_nodo;
 
-		Matriz(int x, int y);
-		Matriz(char * nome_arq);
-		Matriz();
-		~Matriz();
+typedef struct RB_arvore
+{
+	RB_nodo * raiz;
+} RB_arvore;
 
-	private:
-		// dados
-		int tam_x, tam_y;
-		vector<Ponto> L;
+RB_nodo * insere_nodo(RB_arvore *, Dist valor);
+void inicia_arvore(RB_arvore *);
 
-};
+double distancia(Ponto, Ponto);
+Ponto * le_pontos(unsigned int *);
