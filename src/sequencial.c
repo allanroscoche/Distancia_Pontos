@@ -5,7 +5,6 @@
 int main(int argc, char ** argv)
 {
 	Ponto * p;
-	int i;
 	unsigned int tam;
 
 	p = le_pontos(&tam);

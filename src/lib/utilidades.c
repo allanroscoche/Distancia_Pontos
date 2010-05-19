@@ -39,8 +39,9 @@ void inicia_arvore(RB_arvore * arvore)
 	arvore->raiz = NULL;
 }
 Ponto * le_pontos(unsigned int * tam){
+	int result;
 	unsigned int count;
-	unsigned int i,quant_alloc,count_alloc;
+	unsigned int quant_alloc,count_alloc;
 	Ponto *p=0;
 
 	count=0;
@@ -57,7 +58,7 @@ Ponto * le_pontos(unsigned int * tam){
 		}
 
 		count_alloc--;
-		scanf("%d %d %d", &(p[count].x), &(p[count].y),&(p[count].z));
+		result = scanf("%d %d %d", &(p[count].x), &(p[count].y),&(p[count].z));
 		count++;
 
 		quant_alloc++;

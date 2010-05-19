@@ -37,4 +37,4 @@ ${LIB}.o: ${LIB}.c
 	gcc ${FLAGS} -c -o ${LIB}.o ${LIB}.c
 
 clean:
-	rm -rf ${BIN_PARALELO} ${BIN_SEQUENCIAL} ${BIN_TABELA} ${BIN_PONTOS} *.o *~
+	rm -rf ${BIN_PARALELO} ${BIN_SEQUENCIAL} ${BIN_TABELA} ${BIN_PONTOS} *.o *~ ${LIB_PATH}/*.o
