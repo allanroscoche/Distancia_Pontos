@@ -1,3 +1,7 @@
+Máquina:
+AMD Athlon 64 X2 Dual Core 3600+
+875.8 MB RAM
+
 time ./cria_pontos 100 100 100 20000 | ./sequencial | wc -l
 
 19511
@@ -11,4 +15,5 @@ sys	0m0.212s
 real	1m8.726s
 user	1m8.560s
 sys	0m0.120s
+
 
