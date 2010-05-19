@@ -1,0 +1,14 @@
+time ./cria_pontos 100 100 100 20000 | ./sequencial | wc -l
+
+19511
+
+real	1m9.186s
+user	1m8.748s
+sys	0m0.212s
+
+19565
+
+real	1m8.726s
+user	1m8.560s
+sys	0m0.120s
+
