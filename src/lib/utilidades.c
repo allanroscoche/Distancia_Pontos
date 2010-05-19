@@ -14,6 +14,10 @@ RB_nodo * cria_nodo(double data)
 {
 	RB_nodo * no;
 	no = (RB_nodo *) malloc(sizeof(RB_nodo));
+	if(no == NULL){
+		fprintf(stderr, "Erro na alocação do nós\n");
+		exit(1);
+	}
 
 	memcpy(&(no->distancia),&data,sizeof(double));
 	
@@ -49,20 +53,27 @@ RB_nodo * insere_nodo(RB_arvore * arvore, double distancia)
 			pai->esquerda = n;
 		else if(distancia > pai->distancia)
 			pai->direita = n;
-		else
-			return NULL;
-		n->pai = pai;
+		else {
+			fprintf(stderr, "Erro\n");
+			exit(1);
+		}
 	}
+	n->pai = pai;
+	n->esquerda = NULL;
+	n->direita = NULL;
 	n->contador = 1;
 
 	return n;
-	
- 	return NULL;
 }
 RB_arvore * inicia_arvore(RB_arvore * arvore)
 {
-	if(arvore == NULL)
+	if(arvore == NULL){
 		arvore = (RB_arvore *) malloc(sizeof(RB_arvore));
+		if(arvore == NULL){
+			fprintf(stderr, "Erro na alocação da arvore\n");
+			exit(1);
+		}
+	}
 
 	arvore->raiz = NULL;
 
@@ -87,10 +98,10 @@ void imprime_nodo(RB_nodo * no)
 		imprime_nodo(no->direita);
 }
 
-Ponto * le_pontos(unsigned int * tam){
+Ponto * le_pontos(unsigned long * tam){
 	int result;
-	unsigned int count;
-	unsigned int quant_alloc,count_alloc;
+	unsigned long count;
+	unsigned long quant_alloc,count_alloc;
 	Ponto *p=0;
 
 	count=0;
@@ -102,6 +113,10 @@ Ponto * le_pontos(unsigned int * tam){
 		if(count_alloc <= 0)
 		{
 			p = (Ponto *) realloc(p,quant_alloc++*ALLOC_SIZE*sizeof(Ponto));
+			if(p == NULL){
+				fprintf(stderr, "Erro na alocação dos pontos\n");
+			    exit(1);
+			}
 			count_alloc = ALLOC_SIZE;
 		}
 

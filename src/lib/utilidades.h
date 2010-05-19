@@ -39,6 +39,6 @@ RB_nodo * insere_nodo(RB_arvore *, double distancia);
 RB_arvore * inicia_arvore(RB_arvore *);
 
 double distancia(Ponto, Ponto);
-Ponto * le_pontos(unsigned int *);
+Ponto * le_pontos(unsigned long *);
 void imprime_arvore(RB_arvore * p);
 void imprime_nodo(RB_nodo * no);
