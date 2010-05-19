@@ -1,4 +1,4 @@
-FLAGS=-O2 -Wall
+FLAGS=-O2 -Wall -lm
 
 BIN_PARALELO=paralelo
 BIN_SEQUENCIAL=sequencial

@@ -19,16 +19,12 @@ typedef struct Ponto
 	int z;
 } Ponto;
 
-typedef struct Dist
-{
-	double distancia;
-	unsigned int contador;
-} Dist;
 
 typedef struct RB_nodo
 {
 	int cor;
-	Dist valor;
+	double distancia;
+	unsigned int contador;
 	struct RB_nodo * esquerda;
 	struct RB_nodo * direita;
 	struct RB_nodo * pai;
@@ -39,8 +35,10 @@ typedef struct RB_arvore
 	RB_nodo * raiz;
 } RB_arvore;
 
-RB_nodo * insere_nodo(RB_arvore *, Dist valor);
-void inicia_arvore(RB_arvore *);
+RB_nodo * insere_nodo(RB_arvore *, double distancia);
+RB_arvore * inicia_arvore(RB_arvore *);
 
 double distancia(Ponto, Ponto);
 Ponto * le_pontos(unsigned int *);
+void imprime_arvore(RB_arvore * p);
+void imprime_nodo(RB_nodo * no);
