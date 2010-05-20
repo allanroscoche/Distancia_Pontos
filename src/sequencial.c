@@ -13,16 +13,11 @@ int main(int argc, char ** argv)
 
 	p = le_pontos(&tam);
 	
-	//for(i=0;i<tam;i++)
-	//	printf("p[%d] = %d %d %d \n", i, p[i].x, p[i].y, p[i].z);
-
 	printf("Quantidade de pontos:%u\n",tam);
 	printf("Quantidade de distancias:%u\n",(tam*(tam-1)/2));
 
 	a = inicia_arvore(a);
 
-	//for(i=0;i<(tam*(tam-1)/2);i++)
-	//	insere_nodo(a,1);
 	
 	for(i=0;i<tam;i++)
 	{

@@ -40,10 +40,11 @@ int main(void)
 	aux = (total_tam-1) / NUM_THREADS;
 	ini = 0;
 	fim = aux;
-	for(i=0;i<NUM_THREADS;i++)
+	for(i=0;i<NUM_THREADS;i++) // Divide o trabalho igualmente entre as threads
 	{
 		intervalo[i].ini = ini;
 		intervalo[i].fim = fim;
+
 		pthread_create(&proc[i],  	NULL, (void *) &trabalhador, 	    	(void *)&intervalo[i]);
 		pthread_join(proc[i], &status);
 
@@ -69,27 +70,37 @@ void trabalhador(void * t)
 	printf("%02d->%02d\n",inter->ini,inter->fim);
 
 	unsigned long ini_u,ini_v,fim_u,fim_v;
-	indices(inter->ini,&ini_u,&ini_v,tam);
-	indices(inter->fim,&fim_u,&fim_v,tam);
+	indices(inter->ini,&ini_u,&ini_v,tam); // determina quais são os índices do início
+	indices(inter->fim,&fim_u,&fim_v,tam); // determina quais são os índices do final
 	cont = inter->ini;
 
+/* Combinações entre os pontos.
+	ini			fim
+u	n	n	n	(n+1)
+v	n+1	n+2	n+3	(n+1)+1
+*/
+	// Calcula as distâncias até o próximo v=n+1, se necessário.
 	if(fim_u > ini_u){
 		for(j=ini_v;j<tam;j++)
 		{
-			printf("[%2d] = p[%d] p[%d]\n",cont++, ini_u, j);
+			insere_nodo(a,distancia(p[ini_u],p[j]));
+			//printf("[%2d] = p[%d] p[%d]\n",cont++, ini_u, j);
 		}
 	}
+	// Calcula as distâncias com u's completos.
 	for(i=ini_u+1;i<fim_u;i++)
 	{
 		for(j=i+1;j<tam;j++)
 		{
-			//insere_nodo(a,distancia(p[i],p[j]));
-			printf("[%2d] = p[%d] p[%d]\n",cont++, i, j);
+			insere_nodo(a,distancia(p[i],p[j]));
+			//printf("[%2d] = p[%d] p[%d]\n",cont++, i, j);
 		}
 	}
+	// Calculas as outras distâncias, até o último v.
 	for(j=fim_u+1;j<=fim_v;j++)
 	{
-		printf("[%2d] = p[%d] p[%d]\n",cont++, fim_u, j);
+		insere_nodo(a,distancia(p[fim_u],p[j]));
+		//printf("[%2d] = p[%d] p[%d]\n",cont++, fim_u, j);
 	}
 	
 }

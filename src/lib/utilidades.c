@@ -12,8 +12,11 @@ double distancia(Ponto p1, Ponto p2)
 {
 	return sqrt((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y) + (p1.z-p2.z)*(p1.z-p2.z));
 }
-
-void indices(unsigned long indice, unsigned int *ind_i, unsigned int *ind_j, unsigned long tam)
+/*
+	Função que calcula quais pontos U e V serão utilizados para calcular a distância
+	baseado num índice que vai de 0 até (N*(N-1)/2).
+*/
+void indices(unsigned long indice, unsigned int *u, unsigned int *v, unsigned long tam)
 {
 	int tam_aux, count;
 
@@ -24,8 +27,8 @@ void indices(unsigned long indice, unsigned int *ind_i, unsigned int *ind_j, uns
 		count++;
 	}
 	tam_aux = tam_aux + 1;
-	*ind_i = count;
-	*ind_j = tam_aux;
+	*u = count;
+	*v = tam_aux;
 }
 
 RB_nodo * cria_nodo(double data)
