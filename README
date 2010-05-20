@@ -3,3 +3,37 @@ Primeiro Semestre de 2010.
 
 Alunos: Allan de Oliveira Roscoche
 		Fernando Cezar Bernardelli
+
+Projeto:
+
+Feito:
+	- lê e armazena dinamicamente os pontos.
+	- calcula a distancia
+	- armazena numa árvore binária a quantidade de distancias
+	- versão sequencial funcionando
+
+A ser feito:
+	- Mudar a árvore para uma arvore rubro-negra
+	- Criar a versão paralela
+	- Dividir o trabalho entre as threads produtoras igualmente
+	- Sincronizar a escrita na árvore RN
+	- Criar uma hash para a distribuição de distancias entre as árvores
+
+
+Arquitetura:
+
+	Início
+	  |
+	Leitura dos Pontos
+	  |
+	{ // Em paralelo
+		Divisão do trabalho entre as threads produtoras
+	  		|
+		Threads produtoras 
+			|
+		Threads consumidoras
+	  		|
+		Threas consumidoreas armazenam as distâncias em árvores RN de maneira sincronizada
+	}
+	  |
+	Fim do programa
