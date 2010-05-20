@@ -19,6 +19,10 @@ typedef struct Ponto
 	int z;
 } Ponto;
 
+typedef struct Intervalo{
+	unsigned long ini;
+	unsigned long fim;
+} Intervalo;
 
 typedef struct RB_nodo
 {
@@ -42,3 +46,4 @@ double distancia(Ponto, Ponto);
 Ponto * le_pontos(unsigned long *);
 void imprime_arvore(RB_arvore * p);
 void imprime_nodo(RB_nodo * no);
+void indices(unsigned long , unsigned int *, unsigned int *, unsigned long tam);

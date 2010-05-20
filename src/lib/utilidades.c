@@ -2,14 +2,32 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include <pthread.h>
 #include "utilidades.h"
 
 #define BUFF_MAX	30
+pthread_mutex_t novo_nodo;
 
 double distancia(Ponto p1, Ponto p2)
 {
 	return sqrt((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y) + (p1.z-p2.z)*(p1.z-p2.z));
 }
+
+void indices(unsigned long indice, unsigned int *ind_i, unsigned int *ind_j, unsigned long tam)
+{
+	int tam_aux, count;
+
+	tam_aux = indice;
+	count = 0;
+	while(tam_aux > (tam-2)){
+		tam_aux-=(tam-count-2);
+		count++;
+	}
+	tam_aux = tam_aux + 1;
+	*ind_i = count;
+	*ind_j = tam_aux;
+}
+
 RB_nodo * cria_nodo(double data)
 {
 	RB_nodo * no;
@@ -46,6 +64,9 @@ RB_nodo * insere_nodo(RB_arvore * arvore, double distancia)
 	}
 	
 	n = cria_nodo(distancia);
+#ifdef PARALELO
+	pthread_mutex_lock(&novo_nodo);
+#endif
 	if(pai == NULL)
 		arvore->raiz = n;
 	else {
@@ -54,6 +75,9 @@ RB_nodo * insere_nodo(RB_arvore * arvore, double distancia)
 		else if(distancia > pai->distancia)
 			pai->direita = n;
 		else {
+#ifdef PARALELO
+			pthread_mutex_unlock(&novo_nodo);
+#endif
 			fprintf(stderr, "Erro\n");
 			exit(1);
 		}
@@ -62,6 +86,9 @@ RB_nodo * insere_nodo(RB_arvore * arvore, double distancia)
 	n->esquerda = NULL;
 	n->direita = NULL;
 	n->contador = 1;
+#ifdef PARALELO
+	pthread_mutex_unlock(&novo_nodo);
+#endif
 
 	return n;
 }
