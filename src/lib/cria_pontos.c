@@ -18,7 +18,7 @@ int main(int argc, char ** argv)
 	z_max = atoi(argv[3]);
 	quantidade_pontos = atoi(argv[4]);
 
-	srand(time(NULL));
+	//srand(time(NULL));
 
 	int i;
 	int x,y,z;

@@ -5,6 +5,7 @@ Alunos: Allan de Oliveira Roscoche
 		Fernando Cezar Bernardelli
 
 Projeto:
+	- Retirada a idéia de um buffer (muito overhead)
 
 Feito:
 	- lê e armazena dinamicamente os pontos.
@@ -13,6 +14,7 @@ Feito:
 	- versão sequencial funcionando
 
 A ser feito:
+	- Falar com o prof. se é necessário utilizar o modelo produtor-consumidor!!
 	- Mudar a árvore para uma arvore rubro-negra
 	- Criar a versão paralela
 	- Dividir o trabalho entre as threads produtoras igualmente
@@ -27,11 +29,7 @@ Arquitetura:
 	Leitura dos Pontos
 	  |
 	{ // Em paralelo
-		Divisão do trabalho entre as threads produtoras
-	  		|
-		Threads produtoras 
-			|
-		Threads consumidoras
+		Divisão do trabalho equilibrada entre as threads
 	  		|
 		Threas consumidoreas armazenam as distâncias em árvores RN de maneira sincronizada
 	}

@@ -1,4 +1,4 @@
-FLAGS=-O2 -Wall -lm
+FLAGS=-O2 -Wall -lm -lpthread
 
 BIN_PARALELO=paralelo
 BIN_SEQUENCIAL=sequencial
@@ -18,8 +18,8 @@ LIB=${LIB_PATH}/utilidades
 
 all: paralelo sequencial cria_pontos
 
-paralelo: ${SRC_PARALELO}
-	gcc ${FLAGS} -Lphtreads -o ${BIN_PARALELO} ${SRC_PARALELO}
+${BIN_PARALELO}: ${BIN_PARALELO}.o ${LIB}.o
+	gcc ${FLAGS} -o ${BIN_PARALELO} ${BIN_PARALELO}.o ${LIB}.o
 
 ${BIN_SEQUENCIAL}: ${BIN_SEQUENCIAL}.o ${LIB}.o
 	gcc ${FLAGS} -o ${BIN_SEQUENCIAL} ${BIN_SEQUENCIAL}.o ${LIB}.o
@@ -33,8 +33,11 @@ ${BIN_PONTOS}: ${SRC_PONTOS}
 ${BIN_SEQUENCIAL}.o: ${SRC_SEQUENCIAL}
 	gcc ${FLAGS} -c -o ${BIN_SEQUENCIAL}.o ${SRC_SEQUENCIAL}
 
+${BIN_PARALELO}.o: ${SRC_PARALELO}
+	gcc ${FLAGS} -c -o ${BIN_PARALELO}.o ${SRC_PARALELO}
+
 ${LIB}.o: ${LIB}.c
 	gcc ${FLAGS} -c -o ${LIB}.o ${LIB}.c
 
 clean:
-	rm -rf ${BIN_PARALELO} ${BIN_SEQUENCIAL} ${BIN_TABELA} ${BIN_PONTOS} *.o *~ ${LIB_PATH}/*.o
+	rm -rf ${BIN_PARALELO} ${BIN_SEQUENCIAL} ${BIN_TABELA} ${BIN_PONTOS} *.o *~ ${LIB_PATH}/*.o *.*~ ${SCR_PATH}/*.*~ ${LIB_PATH}/*.*~
