@@ -46,7 +46,6 @@ int main(void)
 		intervalo[i].fim = fim;
 
 		pthread_create(&proc[i],  	NULL, (void *) &trabalhador, 	    	(void *)&intervalo[i]);
-		pthread_join(proc[i], &status);
 
 		ini = fim+1;
 		fim = fim + aux + 1;
@@ -54,6 +53,8 @@ int main(void)
 			fim=total_tam-1;
 		
 	}
+	for(i=0;i<NUM_THREADS;i++) // Espera as threads terminarem
+		pthread_join(proc[i], &status);
 	imprime_arvore(a);
 
 	return 0;
