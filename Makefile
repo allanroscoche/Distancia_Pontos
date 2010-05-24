@@ -1,4 +1,4 @@
-FLAGS=-O2 -Wall -lm -lpthread
+FLAGS=-O2 -lm -lpthread
 
 BIN_PARALELO=paralelo
 BIN_SEQUENCIAL=sequencial

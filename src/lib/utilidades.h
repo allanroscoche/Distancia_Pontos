@@ -44,6 +44,11 @@ RB_arvore * inicia_arvore(RB_arvore *);
 
 double distancia(Ponto, Ponto);
 Ponto * le_pontos(unsigned long *);
-void imprime_arvore(RB_arvore * p);
-void imprime_nodo(RB_nodo * no);
-void indices(unsigned long , unsigned int *, unsigned int *, unsigned long tam);
+void imprime_distancias(RB_arvore * p);
+void imprime_distancia_nodo(RB_nodo * no);
+void indices(unsigned long , unsigned long *, unsigned long *, unsigned long tam);
+
+void imprime_arvore(RB_arvore *);
+void imprime_nodo(RB_nodo *,unsigned int);
+void rotacao_direita(RB_nodo *, RB_arvore *);
+void rotacao_esquerda(RB_nodo *, RB_arvore *);

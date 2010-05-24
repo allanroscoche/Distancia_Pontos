@@ -13,8 +13,8 @@ int main(int argc, char ** argv)
 
 	p = le_pontos(&tam);
 	
-	printf("Quantidade de pontos:%u\n",tam);
-	printf("Quantidade de distancias:%u\n",(tam*(tam-1)/2));
+	//printf("Quantidade de pontos:%u\n",tam);
+	//printf("Quantidade de distancias:%u\n",(tam*(tam-1)/2));
 
 	a = inicia_arvore(a);
 
@@ -29,6 +29,12 @@ int main(int argc, char ** argv)
 		}
 	}	
 
+	imprime_distancias(a);
+
+	printf("\n");
+	imprime_arvore(a);
+	printf("\n----\n");
+	rotacao_esquerda(a->raiz,a);
 	imprime_arvore(a);
 
 	return 0;

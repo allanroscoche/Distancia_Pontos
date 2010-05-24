@@ -1,4 +1,4 @@
-#include <stdio.h>
+ #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
@@ -16,7 +16,7 @@ double distancia(Ponto p1, Ponto p2)
 	Função que calcula quais pontos U e V serão utilizados para calcular a distância
 	baseado num índice que vai de 0 até (N*(N-1)/2).
 */
-void indices(unsigned long indice, unsigned int *u, unsigned int *v, unsigned long tam)
+void indices(unsigned long indice, unsigned long *u, unsigned long *v, unsigned long tam)
 {
 	int tam_aux, count;
 
@@ -114,22 +114,111 @@ RB_arvore * inicia_arvore(RB_arvore * arvore)
 
 	return arvore;
 }
-
 void imprime_arvore(RB_arvore * p)
 {
-	if(p->raiz != NULL)
-		imprime_nodo(p->raiz);
-	else
-		printf("arvore vazia\n");
+  unsigned int alt=1;
+  if(p->raiz != NULL)
+    imprime_nodo(p->raiz,alt);
+  else
+    printf("arvore vazia\n");
+  printf("\n");
 }
 
-void imprime_nodo(RB_nodo * no)
+void imprime_nodo(RB_nodo * no, unsigned int altura)
+{
+  unsigned int i;
+
+  printf("%02.3f",no->distancia);
+  if(no->cor = BLACK)
+    printf("B");
+  else
+    printf("R");
+  for(i=0;i<altura;i++)
+    printf("\t");
+  altura++;
+  if(no->esquerda != NULL)
+    imprime_nodo(no->esquerda,altura);
+  printf("\n");
+  for(i=0;i<altura;i++)
+    printf("\t");
+  if(no->direita != NULL)
+    imprime_nodo(no->direita,altura);
+}
+
+void imprime_distancias(RB_arvore * p)
+{
+  if(p->raiz != NULL)
+    imprime_distancia_nodo(p->raiz);
+  else
+    printf("arvore vazia\n");
+  
+}
+
+void rotacao_direita(RB_nodo * no, RB_arvore * pma)
+{
+  RB_nodo * alfa, * beta, * gama, * pai, * filho;
+
+  alfa = no->esquerda->esquerda;
+  beta = no->esquerda->direita;
+  gama = no->direita;
+  pai = no;
+  filho = no->esquerda;
+
+  
+  if(pai->pai != NULL)
+  {
+     if(no->pai->esquerda == pai)
+      pai->pai->esquerda = filho;
+    else
+      pai->pai->direita = filho;
+  }
+  else
+    p->raiz = filho;
+
+  filho->direita = pai;
+  pai->pai = filho;
+  
+  pai->esquerda = NULL;
+  pai->direita = beta;
+
+}
+
+void rotacao_esquerda(RB_nodo * no, RB_arvore * p)
+{
+  RB_nodo * alfa, * beta, * gama, *pai, *filho;
+
+  alfa = no->direita->esquerda;
+  beta = no->direita->direita;
+  gama = no->esquerda;
+  pai = no;
+  filho = no->direita;
+
+  
+  if(pai->pai != NULL)
+  {
+    if(pai->pai->esquerda = pai)
+      pai->esquerda = filho;
+    else
+      pai->direita = filho;
+  }
+  else
+    p->raiz = filho;
+
+
+  filho->esquerda = pai;
+  pai->pai = filho;
+
+  pai->direita = NULL;
+  pai->esquerda = alfa;
+
+}
+void imprime_distancia_nodo(RB_nodo * no)
 {
 	if(no->esquerda != NULL)
-		imprime_nodo(no->esquerda);
+		imprime_distancia_nodo(no->esquerda);
 	printf("distancia:%10f contador:%d \n",no->distancia,no->contador);
 	if(no->direita != NULL)
-		imprime_nodo(no->direita);
+		imprime_distancia_nodo(no->direita);
 }
 
 Ponto * le_pontos(unsigned long * tam){

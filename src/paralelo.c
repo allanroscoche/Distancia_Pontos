@@ -28,8 +28,8 @@ int main(void)
 	p = le_pontos(&tam);
 	total_tam = tam*(tam-1)/2;
 	
-	printf("Quantidade de pontos:%u\n",tam);
-	printf("Quantidade de distancias:%u\n",total_tam);
+	//printf("Quantidade de pontos:%u\n",tam);
+	//printf("Quantidade de distancias:%u\n",total_tam);
 
 	pthread_mutex_init(&novo_nodo,&att);
 	a = NULL;
@@ -54,8 +54,8 @@ int main(void)
 		
 	}
 	for(i=0;i<NUM_THREADS;i++) // Espera as threads terminarem
-		pthread_join(proc[i], &status);
-	imprime_arvore(a);
+	  pthread_join(proc[i],(void *) &status);
+	imprime_distancias(a);
 
 	return 0;
 }
@@ -68,7 +68,7 @@ void trabalhador(void * t)
 
 	cont_buf = 0;
 	inter = (Intervalo *) t;
-	printf("%02d->%02d\n",inter->ini,inter->fim);
+	//printf("%02d->%02d\n",inter->ini,inter->fim);
 
 	unsigned long ini_u,ini_v,fim_u,fim_v;
 	indices(inter->ini,&ini_u,&ini_v,tam); // determina quais são os índices do início
