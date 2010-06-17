@@ -1,4 +1,4 @@
- #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
@@ -59,7 +59,7 @@ RB_nodo * insere_nodo(RB_arvore * arvore, double distancia)
 		pthread_mutex_unlock(&novo_nodo);
 #endif
 		pai = n;
-		if     (distancia < n->distancia)
+		if (distancia < n->distancia)
 			n = n->esquerda;
 		else if(distancia > n->distancia)
 			n = n->direita;
@@ -173,7 +173,7 @@ void rotacao_direita(RB_nodo * no, RB_arvore * pma)
       pai->pai->direita = filho;
   }
   else
-    p->raiz = filho;
+    pma->raiz = filho;
 
   filho->direita = pai;
   pai->pai = filho;

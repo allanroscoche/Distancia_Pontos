@@ -1,5 +1,5 @@
 #define PARALELO
-#define NUM_THREADS		2
+#define NUM_THREADS		4
 
 #include <pthread.h>
 #include <semaphore.h>

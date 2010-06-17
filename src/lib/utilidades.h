@@ -1,10 +1,8 @@
-#define ARQUIVO_MUITO_GRANDE			-2
+#define ARQUIVO_MUITO_GRANDE	-2
 #define ERRO					-1
 
-#define RED					1
+#define RED						1
 #define BLACK					0
-
-//#define NULL					0
 
 #define ALLOC_SIZE				1000
 
