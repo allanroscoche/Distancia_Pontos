@@ -32,10 +32,10 @@ int main(int argc, char ** argv)
 	imprime_distancias(a);
 
 	printf("\n");
-	imprime_arvore(a);
-	printf("\n----\n");
-	rotacao_esquerda(a->raiz,a);
-	imprime_arvore(a);
+	//imprime_arvore(a);
+	//printf("\n----\n");
+	//rotacao_esquerda(a->raiz,a);
+	//imprime_arvore(a);
 
 	return 0;
 
