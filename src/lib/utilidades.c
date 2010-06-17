@@ -65,7 +65,12 @@ RB_nodo * insere_nodo(RB_arvore * arvore, double distancia)
 			n = n->direita;
 		else if(distancia == n->distancia)
 		{
-			n->contador++;
+#ifdef PARALELO
+		pthread_mutex_lock(&novo_nodo);
+		n->contador++;
+		pthread_mutex_unlock(&novo_nodo);
+#endif
+			
 			return n;
 		}
 	}
